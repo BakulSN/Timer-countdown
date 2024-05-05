@@ -48,7 +48,7 @@ function TimeInputs({ setTime, minutesValue, setMinutesValue, secondsValue, setS
                 value={minutesValue}
                 onChange={handleMinutes}
                 disabled={isDisabled}
-                id='outlined-basic'
+                id='outlined-basic1'
                 label='Minutes'
                 variant='outlined'
             />
@@ -57,7 +57,7 @@ function TimeInputs({ setTime, minutesValue, setMinutesValue, secondsValue, setS
                 value={secondsValue}
                 onChange={handleSeconds}
                 disabled={isDisabled}
-                id='outlined-basic'
+                id='outlined-basic2'
                 label='Seconds'
                 variant='outlined'
             />
