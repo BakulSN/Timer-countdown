@@ -31,7 +31,7 @@ function MyProgressBar({ time, totalTime, isStart }: PropType) {
             const progress = Math.max(0, Math.min(100, Math.floor(calculatedProgress)));
             setProgress(progress);
         };
-        if (time <= 1000) setProgress(0);
+        if (time === 0) setProgress(0);
     }, [time, totalTime, isStart]);
 
     return (

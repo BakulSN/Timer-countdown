@@ -15,6 +15,6 @@ const Display: React.FC<PropType> = React.memo(({ time }) => {
    ${seconds < 10 ? '0' + seconds : seconds} : ${milliseconds}`;
     }, [time]);
 
-    return <div className='display'>{formattedTime}</div>;
+    return <div>{formattedTime}</div>;
 });
 export default Display;

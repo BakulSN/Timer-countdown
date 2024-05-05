@@ -1,7 +1,7 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Sstopwatch = styled.div`
-width: 200px;
+    width: 200px;
     height: 140px;
     border-radius: 10px;
     display: flex;
@@ -10,4 +10,4 @@ width: 200px;
     justify-content: space-around;
     font-size: x-large;
     background-image: linear-gradient(to top, #dfe9f3 0%, white 100%);
-`
+`;
