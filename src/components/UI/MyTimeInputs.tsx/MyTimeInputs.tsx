@@ -24,11 +24,14 @@ function TimeInputs({
     const handleMinutes = useCallback(
         (event: React.ChangeEvent<HTMLInputElement>) => {
             const inputValue = event.target.value;
-            if (+inputValue <= 719) {
-                setMinutesValue(inputValue);
-                const total = +inputValue * 60000 + +secondsValue * 1000;
-                setTime(total);
-                setTotalTime(total);
+
+            if (!(inputValue.length > 1 && inputValue.startsWith('0'))) {
+                if (+inputValue <= 719) {
+                    setMinutesValue(inputValue);
+                    const total = +inputValue * 60000 + +secondsValue * 1000;
+                    setTime(total);
+                    setTotalTime(total);
+                }
             }
         },
         [secondsValue, setMinutesValue, setTime, setTotalTime]
@@ -37,11 +40,13 @@ function TimeInputs({
     const handleSeconds = useCallback(
         (event: React.ChangeEvent<HTMLInputElement>) => {
             const inputValue = event.target.value;
-            if (+inputValue <= 60) {
-                setSecondsValue(inputValue);
-                const total = +inputValue * 1000 + +minutesValue * 60000;
-                setTime(total);
-                setTotalTime(total);
+            if (!(inputValue.length > 1 && inputValue.startsWith('0'))) {
+                if (+inputValue <= 60) {
+                    setSecondsValue(inputValue);
+                    const total = +inputValue * 1000 + +minutesValue * 60000;
+                    setTime(total);
+                    setTotalTime(total);
+                }
             }
         },
         [minutesValue, setSecondsValue, setTime, setTotalTime]
