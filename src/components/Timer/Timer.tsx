@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Display from '../Display/Display';
 import ControlButtons from '../UI/MyControlButtons/MyControlButtons';
 import Slider from '@mui/material/Slider';
@@ -10,21 +10,20 @@ import soundEnd from '../../assets/sounds/soundEnd.mp3';
 const Timer = () => {
     const [isStart, setIsStart] = useState(false);
     const [time, setTime] = useState(0);
-    const timerRef = useRef<null | NodeJS.Timer>(null);
+
     const [minutesValue, setMinutesValue] = useState('');
     const [secondsValue, setSecondsValue] = useState('');
     const [totalTime, setTotalTime] = useState(0);
 
     useEffect(() => {
+        let interval: null | NodeJS.Timer;
         if (isStart) {
-            timerRef.current = setInterval(() => {
+            interval = setInterval(() => {
                 setTime(prev => prev - 100);
             }, 100);
         }
-        return () => {
-            if (timerRef.current) {
-                clearInterval(timerRef.current);
-            }
+        return function clear() {
+            if (interval) clearInterval(interval);
         };
     }, [isStart]);
 
@@ -41,10 +40,7 @@ const Timer = () => {
 
     const started = useCallback(() => {
         setIsStart(!isStart);
-        if (totalTime < time) {
-            setTotalTime(time);
-        }
-    }, [isStart, time, totalTime]);
+    }, [isStart]);
 
     const reset = useCallback(() => {
         if (isStart) {
@@ -62,6 +58,7 @@ const Timer = () => {
     const handleSlider = useCallback((_: Event, value: number | number[]) => {
         if (typeof value === 'number') {
             setTime(value);
+            setTotalTime(value);
             setMinutesValue(`${Math.floor(value / 60000)}`);
             setSecondsValue(`${(value - Math.floor(value / 60000) * 60000) / 1000}`);
         }
@@ -73,6 +70,7 @@ const Timer = () => {
             <MyProgressBar time={time} totalTime={totalTime} isStart={isStart} />
             <TimeInputs
                 setTime={setTime}
+                setTotalTime={setTotalTime}
                 minutesValue={minutesValue}
                 setMinutesValue={setMinutesValue}
                 secondsValue={secondsValue}

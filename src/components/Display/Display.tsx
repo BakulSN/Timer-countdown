@@ -5,14 +5,18 @@ type PropType = {
 };
 
 const Display: React.FC<PropType> = React.memo(({ time }) => {
+    const getTime = (unit: number) => {
+        return `${unit < 10 ? '0' + unit : unit}`;
+    };
+
     const formattedTime = React.useMemo(() => {
         const hours = Math.floor(time / (1000 * 60 * 60));
         const minutes = Math.floor((time / (1000 * 60)) % 60);
         const seconds = Math.floor((time / 1000) % 60);
         const milliseconds = Math.floor((time % 1000) / 100);
 
-        return `${hours < 10 ? '0' + hours : hours} : ${minutes < 10 ? '0' + minutes : minutes} :
-   ${seconds < 10 ? '0' + seconds : seconds} : ${milliseconds}`;
+        return `${getTime(hours)} : ${getTime(minutes)} :
+    ${getTime(seconds)} : ${milliseconds}`;
     }, [time]);
 
     return <div>{formattedTime}</div>;

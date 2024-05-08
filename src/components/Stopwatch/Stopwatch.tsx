@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback} from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import ControlButtons from '../UI/MyControlButtons/MyControlButtons';
 import Display from '../Display/Display';
 import { Sstopwatch } from './Stopwatch.styled';
@@ -6,22 +6,22 @@ import { Sstopwatch } from './Stopwatch.styled';
 const Stopwatch = React.memo(() => {
     const [isStart, setIsStart] = useState(false);
     const [time, setTime] = useState(0);
-    const timerRef = useRef<null | NodeJS.Timer>(null);
 
     useEffect(() => {
+        let interval: null | NodeJS.Timer;
         if (isStart) {
-            timerRef.current = setInterval(() => {
+            interval = setInterval(() => {
                 setTime(prevTime => prevTime + 100);
             }, 100);
         }
 
         return function clear() {
-            if (timerRef.current) clearInterval(timerRef.current);
+            if (interval) clearInterval(interval);
         };
     }, [isStart]);
 
     const started = useCallback(() => {
-        setIsStart((prevIsStart) => !prevIsStart);
+        setIsStart(prevIsStart => !prevIsStart);
     }, []);
 
     const reset = useCallback(() => {

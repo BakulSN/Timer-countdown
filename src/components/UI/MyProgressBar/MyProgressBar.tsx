@@ -26,11 +26,11 @@ function MyProgressBar({ time, totalTime, isStart }: PropType) {
     const [progress, setProgress] = useState(0);
 
     useEffect(() => {
-        if (time && totalTime && isStart){
+        if (time && totalTime && isStart) {
             const calculatedProgress = 100 - (time / totalTime) * 100;
             const progress = Math.max(0, Math.min(100, Math.floor(calculatedProgress)));
             setProgress(progress);
-        };
+        }
         if (time === 0) setProgress(0);
     }, [time, totalTime, isStart]);
 
